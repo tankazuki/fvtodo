@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 
 def create_app(app_name = 'fvtodo'):
     app = Flask(app_name,
@@ -8,5 +9,7 @@ def create_app(app_name = 'fvtodo'):
 
     from backend.api import api
     app.register_blueprint(api, url_prefix="/api")
-    
+
+    cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+
     return app
